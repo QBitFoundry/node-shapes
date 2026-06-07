@@ -1,0 +1,67 @@
+# Node modules
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+build/
+lib/
+esm/
+cjs/
+*.tgz
+
+# TypeScript
+*.tsbuildinfo
+
+# Vite / dev
+.vite/
+.vitepress/dist/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Tests / coverage
+coverage/
+.nyc_output/
+
+# Generated types (if using vite-plugin-dts or tsc emit to dist)
+dist/**/*.d.ts
+types/
+typings/
+
+# Lockfiles (if you prefer to ignore some; typically keep one)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Temporary files
+*.tmp
+*.temp
+
+# Misc
+/.idea/
+/.vscode/
+/out/

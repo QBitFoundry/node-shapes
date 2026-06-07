@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Shapes</title>
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+<body>
+    <h1>Node Shapes</h1>
+    <div id="node-shapes-graph">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(20,20)">
+                <rect x="0" y="0" rx="8" ry="8" width="100" height="40" fill="rgba(220,220,220,1)"></rect>
+                <text x="8" y="24" font-family="Arial" font-size="16" fill="black">Hello, some long text</text>
+            </g>
+        </svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" width="140" height="140">
+            <g transform="translate(20,20)">
+                <rect x="0" y="0" width="100" height="100" fill="rgba(220,220,220,1)"/>
+                <foreignObject x="0" y="0" width="100" height="100">
+                    <div xmlns="http://www.w3.org/1999/xhtml"
+                        style="display:flex;align-items:center;justify-content:center;height:100%;padding:6px;box-sizing:border-box;text-align:center;">
+                        <div style="display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;text-overflow:ellipsis;word-break:break-word; color: rgba(0,0,0,1)">
+                        Very long text that may wrap to multiple lines and should be clamped with an ellipsis at the end when it overflows the rectangle.
+                        </div>
+                    </div>
+                </foreignObject>
+            </g>
+        </svg>
+
+        <svg id="svg" xmlns="http://www.w3.org/2000/svg" width="300" height="200">
+            <g transform="translate(20,20)">
+                <rect id="box" x="0" y="0" width="200" height="40" fill="rgba(255,0,0,0.08)"/>
+                <foreignObject id="fo" x="0" y="0" width="200" height="40">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="height:100%;box-sizing:border-box;padding:8px;display:flex;align-items:center;justify-content:center;">
+                        <div id="text" style="
+                            width:100%;
+                            line-height:1.2;        /* in em */
+                            font-size:16px;
+                            display:-webkit-box;
+                            -webkit-box-orient:vertical;
+                            overflow:hidden;
+                            text-overflow:ellipsis;
+                            word-break:break-word;
+                            text-align:center;
+                        ">
+                        Very long text that should wrap into multiple lines inside the rectangle. If it overflows vertically, it must be truncated with an ellipsis after the last visible line.
+                        </div>
+                    </div>
+                </foreignObject>
+            </g>
+        </svg>
+
+        
+    </div>
+</body>
+<script type="module" src="/src/index.ts"></script>
+<script>
+(function(){
+  const fo = document.getElementById('fo');
+  const box = document.getElementById('box');
+  const text = document.getElementById('text');
+
+  function applyClamp() {
+    const style = getComputedStyle(text);
+    // parse line-height: if numeric (e.g., "16.8px") use that; fallback to font-size * line-height multiplier
+    let lineHeightPx = parseFloat(style.lineHeight);
+    if (isNaN(lineHeightPx)) {
+      const fontSizePx = parseFloat(style.fontSize);
+      const lh = parseFloat(style.lineHeight) || 1.2;
+      lineHeightPx = fontSizePx * lh;
+    }
+    // use foreignObject height (or rect height)
+    const foHeight = parseFloat(fo.getAttribute('height')) || text.clientHeight;
+    const paddingTopBottom = 12; // matches padding in CSS (6px top + 6px bottom)
+    const available = Math.max(0, foHeight - paddingTopBottom);
+    const maxLines = Math.floor(available / lineHeightPx) || 1;
+    text.style.webkitLineClamp = String(maxLines);
+    text.style.maxHeight = (maxLines * lineHeightPx) + 'px';
+  }
+
+  // init + observe resize of svg/rect
+  applyClamp();
+  new ResizeObserver(applyClamp).observe(document.getElementById('svg'));
+})();
+</script>
+</html>
