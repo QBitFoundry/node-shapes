@@ -1,0 +1,22 @@
+        <svg id="svg" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(20,20)">
+                <rect id="node-shapes-text-shape" x="0" y="0" rx="8" ry="8" width="200" height="40" fill="rgba(220,220,220,1)"/>
+                <!-- <foreignObject id="node-shapes-text-foreign-object" x="0" y="0" width="200" height="40">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="height:100%;box-sizing:border-box;padding:8px;display:flex;align-items:center;justify-content:center;">
+                        <p id="node-shapes-text" style="
+                            width:100%;
+                            line-height:1.2em;
+                            font-size:16px;
+                            display:-webkit-box;
+                            -webkit-box-orient:vertical;
+                            overflow:hidden;
+                            text-overflow:ellipsis;
+                            word-break:break-word;
+                            text-align:center;
+                            color: rgba(0,0,0,1);
+                        ">
+                        </p>
+                    </div>
+                </foreignObject> -->
+            </g>
+        </svg>
