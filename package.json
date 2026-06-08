@@ -1,17 +1,34 @@
 {
-  "name": "shapes",
-  "version": "1.0.0",
-  "description": "",
+  "name": "node-shapes",
+  "version": "0.0.1",
+  "description": "A JavaScript library for creating diagrams and flowcharts, with JSON export support.",
   "main": "index.js",
+  "license": "MIT",
+  "private": false,
+  "type": "commonjs",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "keywords": [
+    "diagram",
+    "flowchart",
+    "shapes",
+    "nodes",
+    "javascript",
+    "visualization",
+    "json"
+  ],
+  "author": "Muhammad Rukban Ali Yousaf",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QBitFoundry/node-shapes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/QBitFoundry/node-shapes/issues"
+  },
+  "homepage": "https://github.com/QBitFoundry/node-shapes#readme",
   "devDependencies": {
     "typescript": "^6.0.3",
     "vite": "^8.0.16"
