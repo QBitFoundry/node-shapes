@@ -1,0 +1,78 @@
+name: "Branch Flow Protection"
+
+on:
+  pull_request:
+
+jobs:
+  enforce-branch-flow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate PR branch flow
+        env:
+          SOURCE: ${{ github.head_ref }}
+          TARGET: ${{ github.base_ref }}
+
+        run: |
+          echo "PR: $SOURCE -> $TARGET"
+
+          case "$SOURCE" in
+
+            # Block main going into lower branches
+            main)
+              echo "🚀 $SOURCE -❌-> 🎯 $TARGET"
+              echo " "
+              echo "❌ main cannot merge downward."
+              echo "⚠️ Error: Merging from main into '$TARGET' is prohibited."
+              exit 1
+              ;;
+
+            # Hotfix/* branches can only go into main
+            hotfix/*)
+              if [[ "$TARGET" != "main" ]]; then
+                echo "🚀 $SOURCE -❌-> 🎯 $TARGET"
+                echo " "
+                echo "❌ hotfix/* branches must target main."
+                echo "⚠️ Error: Merging from $SOURCE into '$TARGET' is prohibited."
+                exit 1
+              fi
+              ;;
+
+            # Develop branches can only go into main
+            develop)
+              if [["$TARGET" != "main" ]]; then
+                echo "🚀 $SOURCE -❌-> 🎯 $TARGET"
+                echo " "
+                echo "❌ develop branch must target main."
+                echo "⚠️ Error: Merging from $SOURCE into '$TARGET' is prohibited."
+                exit 1
+              fi
+              ;;
+
+            # Features/* branches can only go into develop
+            feature/*)
+              if [[ "$TARGET" != "develop" ]]; then
+                echo "🚀 $SOURCE -❌-> 🎯 $TARGET"
+                echo " "
+                echo "❌ feature/* branches must target develop."
+                echo "⚠️ Error: Merging from $SOURCE into '$TARGET' is prohibited."
+                exit 1
+              fi
+              ;;
+
+            # Bugfixes/* branches can only go into develop
+            bugfix/*)
+              if [[ "$TARGET" != "develop" ]]; then
+                echo "🚀 $SOURCE -❌-> 🎯 $TARGET"
+                echo " "
+                echo "❌ bugfix/* branches must target develop."
+                echo "⚠️ Error: Merging from $SOURCE into '$TARGET' is prohibited."
+                exit 1
+              fi
+              ;;
+
+          esac
+
+          echo "✅ Branch flow is valid."
+          echo " "
+          echo "🚀 $SOURCE -✅-> 🎯 $TARGET"
