@@ -49,7 +49,7 @@ coverage/
 
 # Generated types (if using vite-plugin-dts or tsc emit to dist)
 dist/**/*.d.ts
-types/
+/types/
 typings/
 
 # Lockfiles (if you prefer to ignore some; typically keep one)
