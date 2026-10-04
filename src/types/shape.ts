@@ -26,7 +26,7 @@ type Text = {
 
 export type Shape = {
     [key: string]: {
-        id: string;
+        id: string; // to be removed
         size: Size;
         radius: Radius;
         border: Border;
