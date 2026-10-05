@@ -87,7 +87,7 @@ class Node {
       nodeFunctions.paddingInline = this.canvasPadding.inline;
       nodeFunctions.paddingBlock = this.canvasPadding.block;
       nodeFunctions.elipse();
-      nodeFunctions.draggable(svgElement.id);
+      if(this.draggable) nodeFunctions.draggable(svgElement.id);
     }
   }
 

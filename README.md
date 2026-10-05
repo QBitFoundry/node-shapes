@@ -23,3 +23,16 @@ To set up the shapes run the following command:
 npx node-shapes init
 ```
 This will create a new folder as `default-shapes` within your project's `public` folder. This folder is where all the shapes will exist. You can add custom shapes within this folder as well. To keep custom shapes organized from the default shapes, it is recommended that you keep custom shapes in there own dedicated folder created inside `public/default-shapes`.
+
+---
+## Simple Example of Usage
+The JavaScript code bellow creates a simple block that is draggable and the canvas with 20 px on all sides.
+```
+const nodeShapes = new NodeShapes("node-shapes-graph"); // declare by passing the id or the element.
+nodeShapes.canvasPadding = {inline: 20, block: 20}; // set the padding inside the canvas.
+
+const node = nodeShapes.node("Sample Text", {size: {width: "400", height: "100"}, draggable: true}); // creates the node.
+
+node.add(); // Add the node to the canvas (visual).
+```
+![Node Shapes Representation](.github/assets/node-shapes-simple.png)
